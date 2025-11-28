@@ -1,9 +1,20 @@
 [project]
+
 name = "buergerregister"
 version = "0.1.0"
 description = "Mini-Verwaltungsanwendung zur Bürgerverwaltung"
 authors = [{ name = "Vorname Nachname" }]
 requires-python = ">=3.10"
+
+## **Hinzugefügt aufgrund der Fehlermeldungen in Github**
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black",
+    "isort",
+    "pytest",
+    "pytest-cov",
+]
 
 [tool.black]
 line-length = 88
