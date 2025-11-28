@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .models import Person
 from .validation import validiere_person
 
