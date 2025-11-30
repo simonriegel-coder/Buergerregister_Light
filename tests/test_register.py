@@ -1,3 +1,23 @@
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+# ---------------------------------------------------------
+# Projekt-Root und src/ zum Python-Pfad hinzufügen,
+# damit wir das Paket aus src importieren können
+# ---------------------------------------------------------
+
+# docs/demoproto/demo_add_person.py
+# -> parents[0] = demoproto
+# -> parents[1] = docs
+# -> parents[2] = Projekt-Root
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
 from src.buergerregister.models import Person
 from src.buergerregister.register import Buergerregister
 

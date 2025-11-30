@@ -30,6 +30,7 @@ def main() -> None:
     print("  Live-Demo: Validierung einer Person")
     print("========================================\n")
 
+    
     # Eingaben abfragen
     vorname = input("Vorname: ").strip()
     nachname = input("Nachname: ").strip()

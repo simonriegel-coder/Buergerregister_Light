@@ -1,0 +1,20 @@
+[
+  {
+    "vorname": "Hilman",
+    "nachname": "haqani",
+    "geburtsjahr": 2001,
+    "wohnort": "Jakarta"
+  },
+  {
+    "vorname": "hilman",
+    "nachname": "haqani",
+    "geburtsjahr": 2001,
+    "wohnort": "jakarta"
+  },
+  {
+    "vorname": "Hilman",
+    "nachname": "Haqani",
+    "geburtsjahr": 2001,
+    "wohnort": "Jakarta"
+  }
+]
