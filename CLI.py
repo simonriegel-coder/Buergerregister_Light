@@ -5,6 +5,9 @@ from src.buergerregister.validation import validiere_person
 register = Buergerregister()
 
 
+# ---------------------------------------------------------
+# Tabellenanzeige
+# ---------------------------------------------------------
 def drucke_tabelle(personen):
     if not personen:
         print("Keine Personen vorhanden.")
@@ -24,25 +27,30 @@ def drucke_tabelle(personen):
     print("-" * 70)
 
 
+# ---------------------------------------------------------
+# CLI Hauptmenü
+# ---------------------------------------------------------
 def cli():
     while True:
         print("\n--- Bürgerregister CLI ---")
         print("1: Neue Person anlegen")
         print("2: Alle Personen anzeigen")
         print("3: Nach Nachname suchen")
+        print("4: Alle Daten löschen")
+        print("5: Person löschen")
         print("0: Beenden")
 
         choice = input("Auswahl: ").strip()
 
-        # -------------------------
+        # ---------------------------------------
         # 1: Neue Person anlegen
-        # -------------------------
+        # ---------------------------------------
         if choice == "1":
             data = {
                 "vorname": input("Vorname: ").strip(),
                 "nachname": input("Nachname: ").strip(),
                 "geburtsjahr": input("Geburtsjahr: ").strip(),
-                "wohnort": input("Wohnort: ").strip()
+                "wohnort": input("Wohnort: ").strip(),
             }
 
             # Geburtsjahr konvertieren
@@ -62,33 +70,64 @@ def cli():
             person = Person(**data)
 
             if register.add(person):
-                print("DEBUG PERSONEN:", register.list())
                 print("Person erfolgreich hinzugefügt.")
             else:
                 print("Person konnte nicht gespeichert werden.")
 
-        # -------------------------
+        # ---------------------------------------
         # 2: Alle Personen anzeigen
-        # -------------------------
+        # ---------------------------------------
         elif choice == "2":
             personen = register.list()
             drucke_tabelle(personen)
 
-        # -------------------------
-        # 3: Nach Nachname suchen
-        # -------------------------
+        # ---------------------------------------
+        # 3: Nachname suchen
+        # ---------------------------------------
         elif choice == "3":
             name = input("Nachname: ").strip()
             personen = register.find(name)
             drucke_tabelle(personen)
 
+        # ---------------------------------------
+        # 4: Alle Daten löschen
+        # ---------------------------------------
+        elif choice == "4":
+            confirm = input("Alle Daten löschen? (j/n): ").strip().lower()
+            if confirm == "j":
+                register.clear_all()
+                print("Alle Daten wurden gelöscht.")
+            else:
+                print("Abgebrochen.")
+
+        # ---------------------------------------
+        # 5: Einzelne Person löschen
+        # ---------------------------------------
+        elif choice == "5":
+            v = input("Vorname der zu löschenden Person: ").strip()
+            n = input("Nachname der zu löschenden Person: ").strip()
+
+            if register.delete(v, n):
+                print("✅ Person erfolgreich gelöscht.")
+            else:
+                print("❌ Person wurde nicht gefunden.")
+
+        # ---------------------------------------
+        # 0: Beenden
+        # ---------------------------------------
         elif choice == "0":
             print("Programm beendet.")
             break
 
+        # ---------------------------------------
+        # Ungültige Eingabe
+        # ---------------------------------------
         else:
-            print("Ungültige Eingabe.")
+            print("Ungültige Eingabe. Bitte erneut versuchen.")
 
 
+# ---------------------------------------------------------
+# Startpunkt
+# ---------------------------------------------------------
 if __name__ == "__main__":
     cli()
