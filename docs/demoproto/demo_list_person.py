@@ -10,14 +10,14 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_DIR = PROJECT_ROOT / "src"
 
 """"
-Live-Demo: Suche im Bürgerregister
+Live-Demo: Liste im Bürgerregister
 
 Ablauf:
 
 1) Register anlegen
-2) Suche mit Ergebnis (ein oder mehrere)
-3) Suche ohne Ergebnis
-4) Warnung bei zu vielen Fehlern
+2) alle personen anzeigen
+3) 
+4) 
 
 """
 

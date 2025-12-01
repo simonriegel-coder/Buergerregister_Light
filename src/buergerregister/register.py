@@ -13,6 +13,11 @@ class Buergerregister:
     def add(self, p: Person) -> bool:
         """Fügt eine Person hinzu, sofern sie valide und kein Duplikat ist."""
 
+        # 🔹 Normalisierung der Leereszeichen vor der Validierung
+        p.vorname = p.vorname.strip()
+        p.nachname = p.nachname.strip()
+        p.wohnort = p.wohnort.strip()
+
         # Sichere Validierung
         daten = {
             "vorname": p.vorname,
@@ -27,8 +32,8 @@ class Buergerregister:
             return False
 
         # Case-insensitive Duplikatprüfung
-        vor = p.vorname.strip().lower()
-        nach = p.nachname.strip().lower()
+        vor = p.vorname.lower()
+        nach = p.nachname.lower()
 
         if any(
             e.vorname.strip().lower() == vor and
@@ -47,7 +52,10 @@ class Buergerregister:
 
     def find(self, nachname: str) -> list[Person]:
         """Findet Personen anhand des Nachnamens (case-insensitive)."""
+
+        # 🔹 Normalisierung user input
         key = nachname.strip().lower()
+
         return [
             p for p in self._personen
             if p.nachname.strip().lower() == key
@@ -64,6 +72,7 @@ class Buergerregister:
     def delete(self, vorname: str, nachname: str) -> bool:
         """Löscht eine Person anhand von Vorname + Nachname (case-insensitive)."""
 
+        # 🔹 Normaliierung User Input
         vor = vorname.strip().lower()
         nach = nachname.strip().lower()
 

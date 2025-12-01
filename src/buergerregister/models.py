@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Dict
 
 @dataclass
 class Person:
@@ -9,5 +10,24 @@ class Person:
     wohnort: str
 
     def __post_init__(self):
-        if not (1900 <= self.geburtsjahr <= 2025):
-            raise ValueError("Geburtsjahr unplausibel.")
+        pass
+        
+
+    def to_dict(self) -> Dict:
+        """
+        Gibt eine dict-Repräsentation der Person zurück.
+        Nützlich für Ausgabe- oder Serialisierungszwecke.
+        """
+        return {
+            "vorname": self.vorname,
+            "nachname": self.nachname,
+            "geburtsjahr": self.geburtsjahr,
+            "wohnort": self.wohnort,
+        }
+
+    def get_full_name(self) -> str:
+        """Gibt den vollständigen Namen zurück."""
+        return f"{self.vorname} {self.nachname}"
+        
+
+  

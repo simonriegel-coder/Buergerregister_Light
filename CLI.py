@@ -81,6 +81,9 @@ def cli():
             personen = register.list()
             drucke_tabelle(personen)
 
+         # 🔹 Tambahkan jumlah total data
+            print(f"\nGesamtanzahl: {register.count()}")
+
         # ---------------------------------------
         # 3: Nachname suchen
         # ---------------------------------------

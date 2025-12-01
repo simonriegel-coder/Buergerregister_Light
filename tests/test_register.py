@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import sys
-from pathlib import Path
+import os
 
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, ROOT)
 # ---------------------------------------------------------
 # Projekt-Root und src/ zum Python-Pfad hinzufügen,
 # damit wir das Paket aus src importieren können
@@ -12,25 +14,95 @@ from pathlib import Path
 # -> parents[0] = demoproto
 # -> parents[1] = docs
 # -> parents[2] = Projekt-Root
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIR = PROJECT_ROOT / "src"
 
-if str(SRC_DIR) not in sys.path:
-    sys.path.insert(0, str(SRC_DIR))
-
-from src.buergerregister.models import Person
+import pytest
 from src.buergerregister.register import Buergerregister
+from src.buergerregister.models import Person
 
-def test_add_person_success():
+
+def test_add_valid_person():
     reg = Buergerregister()
-    p = Person("Max", "Mustermann", 1999, "Bochum")
+    p = Person("Max", "Mustermann", 1990, "Bochum")
+
     assert reg.add(p) is True
-    assert len(reg.list()) == 1
+    assert reg.count() == 1
 
-def test_add_duplicate_person():
+
+def test_add_invalid_person():
     reg = Buergerregister()
-    p1 = Person("Max", "Mustermann", 1999, "Bochum")
-    p2 = Person("Max", "Mustermann", 1999, "Bochum")
+
+    # Person ist nicht valid weils < 1900
+    p = Person("Max", "Mustermann", 1890, "Bochum")
+
+    # add() muss False zurückgeben
+    assert reg.add(p) is False
+    assert reg.count() == 0
+
+
+def test_add_duplicate_person_case_insensitive():
+    reg = Buergerregister()
+
+    p1 = Person("Max", "Mustermann", 1990, "Bochum")
+    p2 = Person("max", "MUSTERMANN", 1990, "Bochum")
+
+    assert reg.add(p1) is True
+    assert reg.add(p2) is False  # Duplikate mussen abgelehnt werden
+    assert reg.count() == 1
+
+
+def test_list_returns_copy():
+    reg = Buergerregister()
+    p = Person("Max", "Mustermann", 1990, "Bochum")
+
+    reg.add(p)
+    lst = reg.list()
+
+    assert len(lst) == 1
+    assert lst is not reg._personen   # muss copy
+    assert lst[0] == p
+
+
+def test_find_case_insensitive():
+    reg = Buergerregister()
+
+    p1 = Person("Max", "Mustermann", 1990, "Bochum")
+    p2 = Person("Julia", "MUSTERMANN", 1995, "Essen")
+
     reg.add(p1)
-    assert reg.add(p2) is False
-    assert len(reg.list()) == 1
+    reg.add(p2)
+
+    results = reg.find("mustermann")
+    assert len(results) == 2
+
+    results2 = reg.find("MUSTERMANN")
+    assert len(results2) == 2
+
+
+def test_delete_existing_person():
+    reg = Buergerregister()
+
+    p1 = Person("Max", "Mustermann", 1990, "Bochum")
+    reg.add(p1)
+
+    assert reg.delete("max", "mustermann") is True
+    assert reg.count() == 0
+
+
+def test_delete_non_existing_person():
+    reg = Buergerregister()
+
+    reg.add(Person("Max", "Mustermann", 1990, "Bochum"))
+
+    assert reg.delete("Julia", "Musterfrau") is False
+    assert reg.count() == 1
+
+
+def test_clear_all():
+    reg = Buergerregister()
+
+    reg.add(Person("Max", "Mustermann", 1990, "Bochum"))
+    reg.add(Person("Anna", "Schmidt", 2000, "Essen"))
+
+    reg.clear_all()
+    assert reg.count() == 0
+
