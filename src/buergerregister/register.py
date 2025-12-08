@@ -40,7 +40,7 @@ class Buergerregister:
             e.nachname.strip().lower() == nach
             for e in self._personen
         ):
-            print("Warnung: Duplikat gefunden.")
+            print("\033[91mWarnung: Duplikat gefunden.\033[0m")
             return False
 
         self._personen.append(p)
@@ -72,7 +72,7 @@ class Buergerregister:
     def delete(self, vorname: str, nachname: str) -> bool:
         """Löscht eine Person anhand von Vorname + Nachname (case-insensitive)."""
 
-        # 🔹 Normaliierung User Input
+        # 🔹 Normalisierung User Input
         vor = vorname.strip().lower()
         nach = nachname.strip().lower()
 

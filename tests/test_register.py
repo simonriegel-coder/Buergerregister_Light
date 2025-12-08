@@ -31,8 +31,8 @@ def test_add_valid_person():
 def test_add_invalid_person():
     reg = Buergerregister()
 
-    # Person ist nicht valid weils < 1900
-    p = Person("Max", "Mustermann", 1890, "Bochum")
+    # Person ist nicht valid weil < 1900
+    p = Person("Max", "Mustermann", 1800, "Bochum")
 
     # add() muss False zurückgeben
     assert reg.add(p) is False

@@ -13,25 +13,25 @@ def validiere_person(p: Dict[str, Any]) -> Tuple[bool, List[str]]:
     # Vorname prüfen
     vorname = p.get("vorname")
     if not vorname:
-        errors.append("Vorname fehlt.")
+        errors.append("\033[91mVorname fehlt.\033[0m")
     elif any(ch.isdigit() for ch in vorname):
-        errors.append("Vorname darf keine Zahlen enthalten.")
+        errors.append("\033[91mVorname darf keine Zahlen enthalten.\033[0m")
 
     # Nachname prüfen
     nachname = p.get("nachname")
     if not nachname:
-        errors.append("Nachname fehlt.")
+        errors.append("\033[91mNachname fehlt.\033[0m")
     elif any(ch.isdigit() for ch in nachname):
-        errors.append("Nachname darf keine Zahlen enthalten.")
+        errors.append("\033[91mNachname darf keine Zahlen enthalten.\033[0m")
 
     # Wohnort prüfen
     wohnort = p.get("wohnort")
     if not wohnort:
-        errors.append("Wohnort fehlt.")
+        errors.append("\033[91mWohnort fehlt.\033[0m]")
 
     # Geburtsjahr prüfen
     jahr = p.get("geburtsjahr")
     if not isinstance(jahr, int) or not (1900 <= jahr <= 2025):
-        errors.append("Geburtsjahr unplausibel.")
+        errors.append("\033[91mGeburtsjahr unplausibel.\033[0m]")
 
     return (len(errors) == 0, errors)

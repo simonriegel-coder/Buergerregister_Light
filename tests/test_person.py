@@ -13,7 +13,7 @@ def test_person_valid():
     """wenn Data Valid ist, dann wird das Objek "person" etabliert."""
     p = Person("Max", "Mustermann", 1990, "Bochum")
     assert p.vorname == "Max"
-    assert p.nachname == "Mustermann"
+    assert p.nachname == "Mustermann" 
     assert p.geburtsjahr == 1990
     assert p.wohnort == "Bochum"
 
@@ -37,7 +37,7 @@ def test_person_get_full_name():
     assert p.get_full_name() == "Max Mustermann"
 
 def test_person_whitespace_preserved():
-    """Saat ini Person tidak strip spasi, jadi harus uji sesuai perilaku sekarang."""
+    """."""
     p = Person("  Max", "Mustermann  ", 1990, "Bochum")
     assert p.vorname == "  Max"
     assert p.nachname == "Mustermann  "

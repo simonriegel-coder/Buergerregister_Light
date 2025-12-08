@@ -32,7 +32,7 @@ def test_missing_firstname():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Vorname fehlt." in errors
+    assert "\033[91mVorname fehlt.\033[0m" in errors
 
 
 def test_missing_lastname():
@@ -44,7 +44,7 @@ def test_missing_lastname():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Nachname fehlt." in errors
+    assert "\033[91mNachname fehlt.\033[0m" in errors
 
 
 def test_missing_city():
@@ -56,7 +56,7 @@ def test_missing_city():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Wohnort fehlt." in errors
+    assert "\033[91mWohnort fehlt.\033[0m]" in errors
 
 
 def test_firstname_contains_digits():
@@ -68,7 +68,7 @@ def test_firstname_contains_digits():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Vorname darf keine Zahlen enthalten." in errors
+    assert "\033[91mVorname darf keine Zahlen enthalten.\033[0m" in errors
 
 
 def test_lastname_contains_digits():
@@ -80,7 +80,7 @@ def test_lastname_contains_digits():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Nachname darf keine Zahlen enthalten." in errors
+    assert "\033[91mNachname darf keine Zahlen enthalten.\033[0m" in errors
 
 
 def test_birthyear_too_small():
@@ -92,7 +92,7 @@ def test_birthyear_too_small():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Geburtsjahr unplausibel." in errors
+    assert "\033[91mGeburtsjahr unplausibel.\033[0m]" in errors
 
 
 def test_birthyear_too_large():
@@ -104,16 +104,16 @@ def test_birthyear_too_large():
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Geburtsjahr unplausibel." in errors
+    assert "\033[91mGeburtsjahr unplausibel.\033[0m]" in errors
 
 
 def test_birthyear_not_int():
     p = {
         "vorname": "Max",
         "nachname": "Mustermann",
-        "geburtsjahr": "1990",  # string bukan int
+        "geburtsjahr": "1990",  # string kein int
         "wohnort": "Bochum",
     }
     ok, errors = validiere_person(p)
     assert ok is False
-    assert "Geburtsjahr unplausibel." in errors
+    assert "\033[91mGeburtsjahr unplausibel.\033[0m]" in errors

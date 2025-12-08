@@ -3,6 +3,8 @@ from src.buergerregister.register import Buergerregister
 from src.buergerregister.validation import validiere_person
 
 register = Buergerregister()
+print("\033[92mBürgerregister CLI gestartet.\033[0m")
+
 
 
 # ---------------------------------------------------------
@@ -10,7 +12,7 @@ register = Buergerregister()
 # ---------------------------------------------------------
 def drucke_tabelle(personen):
     if not personen:
-        print("Keine Personen vorhanden.")
+        print("\033[91mKeine Personen vorhanden.\033[0m")
         return
 
     print("\n" + "-" * 70)
@@ -57,12 +59,12 @@ def cli():
             try:
                 data["geburtsjahr"] = int(data["geburtsjahr"])
             except ValueError:
-                print("Fehler: Geburtsjahr muss eine Zahl sein.")
+                print("\033[91mFehler: Geburtsjahr muss eine Zahl sein.\033[0m")
                 continue
 
             valid, errors = validiere_person(data)
             if not valid:
-                print("Fehler in den Eingaben:")
+                print("\033[91mFehler in den Eingaben:\033[0m")
                 for e in errors:
                     print(" -", e)
                 continue
@@ -70,9 +72,9 @@ def cli():
             person = Person(**data)
 
             if register.add(person):
-                print("Person erfolgreich hinzugefügt.")
+                print("\033[92mPerson erfolgreich hinzugefügt.\033[0m")
             else:
-                print("Person konnte nicht gespeichert werden.")
+                print("\033[91mPerson konnte nicht gespeichert werden.\033[0m")
 
         # ---------------------------------------
         # 2: Alle Personen anzeigen
@@ -99,7 +101,7 @@ def cli():
             confirm = input("Alle Daten löschen? (j/n): ").strip().lower()
             if confirm == "j":
                 register.clear_all()
-                print("Alle Daten wurden gelöscht.")
+                print("\033[93mAlle Daten wurden gelöscht.\033[0m")
             else:
                 print("Abgebrochen.")
 
@@ -126,7 +128,7 @@ def cli():
         # Ungültige Eingabe
         # ---------------------------------------
         else:
-            print("Ungültige Eingabe. Bitte erneut versuchen.")
+            print("\033[91mUngültige Eingabe. Bitte erneut versuchen.\033[0m")
 
 
 # ---------------------------------------------------------
