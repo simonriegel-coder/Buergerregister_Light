@@ -38,7 +38,7 @@ if str(SRC_DIR) not in sys.path:
 # Falls er anders heißt, musst du den Namen unten anpassen.
 # ---------------------------------------------------------
 
-from buergerregister.models import Person          # ggf. Paketname anpassen
+from buergerregister.models import Person  # ggf. Paketname anpassen
 from buergerregister.register import Buergerregister  # dto.
 
 

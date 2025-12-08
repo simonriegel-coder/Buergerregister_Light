@@ -25,11 +25,10 @@ Ablauf:
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
     
+from tabulate import tabulate
+
 from buergerregister.models import Person
 from buergerregister.register import Buergerregister
-
-
-from tabulate import tabulate
 
 
 def demo_list_person_table():

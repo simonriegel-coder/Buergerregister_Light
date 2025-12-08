@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import sys
 import os
+import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
@@ -15,9 +15,8 @@ sys.path.insert(0, ROOT)
 # -> parents[1] = docs
 # -> parents[2] = Projekt-Root
 
-import pytest
-from src.buergerregister.register import Buergerregister
 from src.buergerregister.models import Person
+from src.buergerregister.register import Buergerregister
 
 
 def test_add_valid_person():
