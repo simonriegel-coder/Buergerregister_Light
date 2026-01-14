@@ -36,8 +36,7 @@ class Buergerregister:
         nach = p.nachname.lower()
 
         if any(
-            e.vorname.strip().lower() == vor and
-            e.nachname.strip().lower() == nach
+            e.vorname.strip().lower() == vor and e.nachname.strip().lower() == nach
             for e in self._personen
         ):
             print("\033[91mWarnung: Duplikat gefunden.\033[0m")
@@ -56,21 +55,15 @@ class Buergerregister:
         # 🔹 Normalisierung user input
         key = nachname.strip().lower()
 
-        return [
-            p for p in self._personen
-            if p.nachname.strip().lower() == key
-        ]
-    
+        return [p for p in self._personen if p.nachname.strip().lower() == key]
+
     def find_by_wohnort(self, wohnort: str) -> List[Person]:
         """Findet Personen anhand des Wohnorts (case-insensitive)."""
 
         # 🔹 Normalisierung user input
         key = wohnort.strip().lower()
 
-        return [
-            p for p in self._personen
-            if p.wohnort.strip().lower() == key
-        ]
+        return [p for p in self._personen if p.wohnort.strip().lower() == key]
 
     def count(self) -> int:
         """Gibt die Gesamtanzahl der gespeicherten Personen zurück."""
@@ -80,7 +73,6 @@ class Buergerregister:
         """Löscht alle Personen."""
         self._personen.clear()
 
-
     def delete(self, vorname: str, nachname: str) -> bool:
         """Löscht eine Person anhand von Vorname + Nachname (case-insensitive)."""
 
@@ -89,10 +81,7 @@ class Buergerregister:
         nach = nachname.strip().lower()
 
         for p in self._personen:
-            if (
-                p.vorname.strip().lower() == vor
-                and p.nachname.strip().lower() == nach
-            ):
+            if p.vorname.strip().lower() == vor and p.nachname.strip().lower() == nach:
                 self._personen.remove(p)
                 return True
 

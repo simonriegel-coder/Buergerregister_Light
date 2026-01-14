@@ -1,6 +1,4 @@
 import json
-from pathlib import Path
-
 import os
 import sys
 
@@ -16,9 +14,9 @@ sys.path.insert(0, ROOT)
 # -> parents[1] = docs
 # -> parents[2] = Projekt-Root
 
+from src.buergerregister.jsonpersistance import JsonPersistence
 from src.buergerregister.models import Person
 from src.buergerregister.register import Buergerregister
-from src.buergerregister.jsonpersistance import JsonPersistence
 
 
 def test_save_and_load_roundtrip(tmp_path):
@@ -86,11 +84,9 @@ def test_load_partial_invalid_entries(tmp_path):
             "vorname": "rifdah",
             "nachname": "adilarifah",
             "geburtsjahr": 2004,
-            "wohnort": "Bandung"
+            "wohnort": "Bandung",
         },
-        {
-            "foo": "bar"  # ungültiger Datensatz
-        }
+        {"foo": "bar"},  # ungültiger Datensatz
     ]
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -101,6 +97,7 @@ def test_load_partial_invalid_entries(tmp_path):
 
     assert len(personen) == 1
     assert personen[0].vorname == "rifdah"
+
 
 def test_duplicate_entries_are_not_added_twice(tmp_path):
     """
@@ -114,15 +111,15 @@ def test_duplicate_entries_are_not_added_twice(tmp_path):
             "vorname": "rifdah",
             "nachname": "adilarifah",
             "geburtsjahr": 2004,
-            "wohnort": "Bandung"
+            "wohnort": "Bandung",
         },
         {
             # Duplikat (gleiche Person)
             "vorname": "rifdah",
             "nachname": "adilarifah",
             "geburtsjahr": 2004,
-            "wohnort": "Bandung"
-        }
+            "wohnort": "Bandung",
+        },
     ]
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -133,7 +130,6 @@ def test_duplicate_entries_are_not_added_twice(tmp_path):
 
     # Erwartung: nur EIN Eintrag
     assert len(personen) == 1
-
 
 
 def test_save_empty_register(tmp_path):

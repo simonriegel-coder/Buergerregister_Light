@@ -13,10 +13,12 @@ Ablauf:
 
 MAX_FEHLER = 3  # Warnung nach 3 erfolglosen Versuchen
 
+
 class Person:
     def __init__(self, vorname, nachname):
         self.vorname = vorname
         self.nachname = nachname
+
 
 class Buergerregister:
     def __init__(self):
@@ -26,15 +28,16 @@ class Buergerregister:
         self.eintraege.append(person)
 
     def find(self, nachname):
-    # Eingabe prüfen
+        # Eingabe prüfen
         if not isinstance(nachname, str) or nachname.strip() == "":
             raise ValueError("Ungültige Eingabe!")
         # Suchlogik: Groß-/Kleinschreibung ignorieren
         nachname = nachname.strip().lower()
         return [p for p in self.eintraege if p.nachname.lower() == nachname]
 
+
 def main():
-# Register anlegen und Personen hinzufügen
+    # Register anlegen und Personen hinzufügen
     register = Buergerregister()
     register.add(Person("Anna", "Schmidt"))
     register.add(Person("Klaus", "Schmidt"))
@@ -67,9 +70,11 @@ def main():
 
         # Warnung nach 3 erfolglosen Versuchen
         if fehler >= MAX_FEHLER:
-            print("⚠ Achtung: Zu viele erfolglose Versuche! Bitte überprüfe deine Eingaben.")
+            print(
+                "⚠ Achtung: Zu viele erfolglose Versuche! Bitte überprüfe deine Eingaben."
+            )
             fehler = 0  # Zähler zurücksetzen
+
 
 if __name__ == "__main__":
     main()
-

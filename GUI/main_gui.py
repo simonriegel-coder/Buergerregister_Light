@@ -4,14 +4,15 @@ import tkinter as tk
 from dataclasses import dataclass
 from typing import List
 
-
 # ---------------------------------------------------------------------------
 # Serviceschicht (Vorgegeben / zu verwenden)
 # ---------------------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class PersonEntry:
     """Datenobjekt für einen Personeneintrag."""
+
     name: str
     birth_year: int
 
@@ -42,6 +43,7 @@ class SimpleRegister:
 # ---------------------------------------------------------------------------
 # GUI-Schicht
 # ---------------------------------------------------------------------------
+
 
 class RegisterApp(tk.Tk):
     """Tkinter-App für das Bürgerregister Light."""
@@ -79,9 +81,7 @@ class RegisterApp(tk.Tk):
         )
 
         tk.Label(input_frame, text="Nachname:").grid(row=0, column=2, sticky="w")
-        tk.Entry(input_frame, width=30).grid(
-            row=0, column=3, padx=5
-        )
+        tk.Entry(input_frame, width=30).grid(row=0, column=3, padx=5)
 
         tk.Label(input_frame, text="Geburtsjahr:").grid(row=1, column=0, sticky="w")
         tk.Entry(input_frame, textvariable=self.year_var, width=30).grid(
@@ -89,9 +89,7 @@ class RegisterApp(tk.Tk):
         )
 
         tk.Label(input_frame, text="Wohnort:").grid(row=1, column=2, sticky="w")
-        tk.Entry(input_frame, width=30).grid(
-            row=1, column=3, padx=5
-        )
+        tk.Entry(input_frame, width=30).grid(row=1, column=3, padx=5)
 
         # TODO 4: Button
         tk.Button(

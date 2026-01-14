@@ -1,6 +1,3 @@
-
-
-
 from __future__ import annotations
 
 import sys
@@ -24,7 +21,7 @@ Ablauf:
 
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
-    
+
 from tabulate import tabulate
 
 from buergerregister.models import Person
@@ -49,10 +46,7 @@ def demo_list_person_table():
 
     # Tabelle erstellen
     headers = ["Vorname", "Nachname", "Geburtsjahr", "Wohnort"]
-    table = [
-        [p.vorname, p.nachname, p.geburtsjahr, p.wohnort]
-        for p in personen
-    ]
+    table = [[p.vorname, p.nachname, p.geburtsjahr, p.wohnort] for p in personen]
 
     print("\n--- Personenliste als Tabelle ---\n")
     print(tabulate(table, headers=headers, tablefmt="grid"))
