@@ -105,3 +105,4 @@ def test_clear_all():
     reg.clear_all()
     assert reg.count() == 0
 
+

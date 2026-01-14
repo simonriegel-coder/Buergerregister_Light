@@ -1,9 +1,11 @@
 from src.buergerregister.models import Person
 from src.buergerregister.register import Buergerregister
 from src.buergerregister.validation import validiere_person
+from src.buergerregister.jsonpersistance import JsonPersistence
 
-register = Buergerregister()
+register = JsonPersistence.load("people.json")
 print("\033[92mBürgerregister CLI gestartet.\033[0m")
+print("\033[94mDaten aus people.json geladen.\033[0m")
 
 
 
@@ -40,6 +42,7 @@ def cli():
         print("3: Nach Nachname suchen")
         print("4: Alle Daten löschen")
         print("5: Person löschen")
+        print("6: Suche nach Wohnort")
         print("0: Beenden")
 
         choice = input("Auswahl: ").strip()
@@ -118,9 +121,19 @@ def cli():
                 print("❌ Person wurde nicht gefunden.")
 
         # ---------------------------------------
+        # 6: Nach Wohnort suchen
+        # ---------------------------------------
+        elif choice == "6":
+            ort = input("Wohnort: ").strip()
+            personen = register.find_by_wohnort(ort)
+            drucke_tabelle(personen)
+
+        # ---------------------------------------
         # 0: Beenden
         # ---------------------------------------
         elif choice == "0":
+            JsonPersistence.save(register, "people.json")
+            print("\033[92mDaten wurden gespeichert.\033[0m")
             print("Programm beendet.")
             break
 

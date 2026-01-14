@@ -14,9 +14,9 @@ class Buergerregister:
         """Fügt eine Person hinzu, sofern sie valide und kein Duplikat ist."""
 
         # 🔹 Normalisierung der Leereszeichen vor der Validierung
-        p.vorname = p.vorname.strip()
-        p.nachname = p.nachname.strip()
-        p.wohnort = p.wohnort.strip()
+        p.vorname = p.vorname.strip().lower()
+        p.nachname = p.nachname.strip().lower()
+        p.wohnort = p.wohnort.strip().lower()
 
         # Sichere Validierung
         daten = {
@@ -60,6 +60,17 @@ class Buergerregister:
             p for p in self._personen
             if p.nachname.strip().lower() == key
         ]
+    
+    def find_by_wohnort(self, wohnort: str) -> List[Person]:
+        """Findet Personen anhand des Wohnorts (case-insensitive)."""
+
+        # 🔹 Normalisierung user input
+        key = wohnort.strip().lower()
+
+        return [
+            p for p in self._personen
+            if p.wohnort.strip().lower() == key
+        ]
 
     def count(self) -> int:
         """Gibt die Gesamtanzahl der gespeicherten Personen zurück."""
@@ -68,6 +79,7 @@ class Buergerregister:
     def clear_all(self):
         """Löscht alle Personen."""
         self._personen.clear()
+
 
     def delete(self, vorname: str, nachname: str) -> bool:
         """Löscht eine Person anhand von Vorname + Nachname (case-insensitive)."""

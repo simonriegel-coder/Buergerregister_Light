@@ -1,20 +1,26 @@
 [
   {
-    "vorname": "Hilman",
-    "nachname": "haqani",
-    "geburtsjahr": 2001,
-    "wohnort": "Jakarta"
+    "vorname": "rifdah",
+    "nachname": "adilarifah",
+    "geburtsjahr": 2004,
+    "wohnort": "bandung"
   },
   {
-    "vorname": "hilman",
+    "vorname": "simon",
+    "nachname": "rigel",
+    "geburtsjahr": 1990,
+    "wohnort": "bremen"
+  },
+  {
+    "vorname": "muhammad hilman",
     "nachname": "haqani",
     "geburtsjahr": 2001,
     "wohnort": "jakarta"
   },
   {
-    "vorname": "Hilman",
-    "nachname": "Haqani",
-    "geburtsjahr": 2001,
-    "wohnort": "Jakarta"
+    "vorname": "max",
+    "nachname": "mustermann",
+    "geburtsjahr": 2000,
+    "wohnort": "hamburg"
   }
 ]
