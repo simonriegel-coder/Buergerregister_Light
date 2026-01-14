@@ -57,7 +57,7 @@ def test_list_returns_copy():
     lst = reg.list()
 
     assert len(lst) == 1
-    assert lst is not reg._personen   # muss copy
+    assert lst is not reg._personen  # muss copy
     assert lst[0] == p
 
 
@@ -104,4 +104,3 @@ def test_clear_all():
 
     reg.clear_all()
     assert reg.count() == 0
-

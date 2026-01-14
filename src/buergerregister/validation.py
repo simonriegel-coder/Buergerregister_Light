@@ -1,4 +1,4 @@
-from typing import Tuple, List, Dict, Any
+from typing import Any, Dict, List, Tuple
 
 
 def validiere_person(p: Dict[str, Any]) -> Tuple[bool, List[str]]:

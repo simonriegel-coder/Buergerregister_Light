@@ -12,7 +12,7 @@ def test_person_valid():
     """wenn Data Valid ist, dann wird das Objek "person" etabliert."""
     p = Person("Max", "Mustermann", 1990, "Bochum")
     assert p.vorname == "Max"
-    assert p.nachname == "Mustermann" 
+    assert p.nachname == "Mustermann"
     assert p.geburtsjahr == 1990
     assert p.wohnort == "Bochum"
 
@@ -34,6 +34,7 @@ def test_person_get_full_name():
     """Methode get_full_name muss volständige Name zurückgeben."""
     p = Person("Max", "Mustermann", 1990, "Bochum")
     assert p.get_full_name() == "Max Mustermann"
+
 
 def test_person_whitespace_preserved():
     """."""

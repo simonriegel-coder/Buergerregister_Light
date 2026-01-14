@@ -75,7 +75,7 @@ def test_lastname_contains_digits():
         "vorname": "Max",
         "nachname": "Must3rmann",
         "geburtsjahr": 1990,
-               "wohnort": "Bochum",
+        "wohnort": "Bochum",
     }
     ok, errors = validiere_person(p)
     assert ok is False
